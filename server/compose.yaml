@@ -27,7 +27,7 @@ services:
     network_mode: service:museum
     depends_on:
       - museum
-    command: "TCP-LISTEN:3200,fork,reuseaddr TCP:minio:3520"
+    command: "TCP-LISTEN:3520,fork,reuseaddr TCP:minio:3520"
 
   postgres:
     image: postgres:15
