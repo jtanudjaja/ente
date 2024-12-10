@@ -27,7 +27,7 @@ services:
     network_mode: service:museum
     depends_on:
       - museum
-    command: "TCP-LISTEN:3200,fork,reuseaddr TCP:minio:3200"
+    command: "TCP-LISTEN:3200,fork,reuseaddr TCP:minio:3520"
 
   postgres:
     image: postgres:15
@@ -61,8 +61,8 @@ services:
     # Use different ports than the minio defaults to avoid conflicting
     # with the ports used by Prometheus.
     ports:
-      - 3300:3200 # API
-      - 3301:3201 # Console
+      - 3520:3200 # API
+      - 3521:3201 # Console
     environment:
       MINIO_ROOT_USER: test
       MINIO_ROOT_PASSWORD: testtest
