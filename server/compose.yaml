@@ -5,7 +5,7 @@ services:
       args:
         GIT_COMMIT: development-cluster
     ports:
-      - 8080:8080 # API
+      - 3500:8080 # API
       - 2113:2112 # Prometheus metrics
     depends_on:
       postgres:
