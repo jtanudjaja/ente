@@ -22,12 +22,12 @@ services:
       - internal
 
   # Resolve "localhost:3520" in the museum container to the minio container.
-  socat:
-    image: alpine/socat
-    network_mode: service:museum
-    depends_on:
-      - museum
-    command: "TCP-LISTEN:3520,fork,reuseaddr TCP:minio:3520"
+  # socat:
+  #   image: alpine/socat
+  #   network_mode: service:museum
+  #   depends_on:
+  #     - museum
+  #   command: "TCP-LISTEN:3520,fork,reuseaddr TCP:minio:3520"
 
   postgres:
     image: postgres:15
@@ -56,37 +56,37 @@ services:
     networks:
       - internal
 
-  minio:
-    image: minio/minio
-    # Use different ports than the minio defaults to avoid conflicting
-    # with the ports used by Prometheus.
-    ports:
-      - 3520:3520 # API
-      - 3521:3521 # Console
-    environment:
-      MINIO_ROOT_USER: test
-      MINIO_ROOT_PASSWORD: testtest
-    command: server /data --address ":3520" --console-address ":3521"
-    volumes:
-      - minio-data:/data
-    networks:
-      - internal
+  # minio:
+  #   image: minio/minio
+  #   # Use different ports than the minio defaults to avoid conflicting
+  #   # with the ports used by Prometheus.
+  #   ports:
+  #     - 3520:3520 # API
+  #     - 3521:3521 # Console
+  #   environment:
+  #     MINIO_ROOT_USER: test
+  #     MINIO_ROOT_PASSWORD: testtest
+  #   command: server /data --address ":3520" --console-address ":3521"
+  #   volumes:
+  #     - minio-data:/data
+  #   networks:
+  #     - internal
 
-  minio-provision:
-    image: minio/mc
-    depends_on:
-      - minio
-    volumes:
-      - ./scripts/compose/minio-provision.sh:/provision.sh:ro
-      - minio-data:/data
-    networks:
-      - internal
-    entrypoint: sh /provision.sh
+  # minio-provision:
+  #   image: minio/mc
+  #   depends_on:
+  #     - minio
+  #   volumes:
+  #     - ./scripts/compose/minio-provision.sh:/provision.sh:ro
+  #     - minio-data:/data
+  #   networks:
+  #     - internal
+  #   entrypoint: sh /provision.sh
 
 volumes:
   custom-logs:
   postgres-data:
-  minio-data:
+  # minio-data:
 
 
 networks:
