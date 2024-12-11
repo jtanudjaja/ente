@@ -21,7 +21,7 @@ services:
     networks:
       - internal
 
-  # Resolve "localhost:3200" in the museum container to the minio container.
+  # Resolve "localhost:3520" in the museum container to the minio container.
   socat:
     image: alpine/socat
     network_mode: service:museum
@@ -61,12 +61,12 @@ services:
     # Use different ports than the minio defaults to avoid conflicting
     # with the ports used by Prometheus.
     ports:
-      - 3520:3200 # API
-      - 3521:3201 # Console
+      - 3520:3520 # API
+      - 3521:3521 # Console
     environment:
       MINIO_ROOT_USER: test
       MINIO_ROOT_PASSWORD: testtest
-    command: server /data --address ":3200" --console-address ":3201"
+    command: server /data --address ":3520" --console-address ":3521"
     volumes:
       - minio-data:/data
     networks:
