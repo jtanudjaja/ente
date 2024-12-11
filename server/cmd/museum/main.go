@@ -825,6 +825,7 @@ func setupLogger(environment string) {
 func setupDatabase() *sql.DB {
 	log.Println("Setting up db")
 	db, err := sql.Open("postgres", config.GetPGInfo())
+	log.Printf(config.GetPGInfo())
 
 	if err != nil {
 		log.Panic(err)
